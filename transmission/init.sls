@@ -33,8 +33,8 @@ transmission_config_file:
     - group: {{ transmission.group }}
     - require:
       - pkg: transmission
-      - service: transmission_config
-      - directory: transmission_config_folder
+      - service: transmission_config_file
+      - file: transmission_config_folder
   service.dead:
     - name: {{ transmission.service }}
     - require:
