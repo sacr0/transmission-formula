@@ -42,7 +42,7 @@
     "rename-partial-files": true,
     "rpc-authentication-required": true,
     "rpc-bind-address": "0.0.0.0",
-    "rpc-enabled": {{ salt['pillar.get']('transmission:rpc-enable', true) }},
+    "rpc-enabled": {{ salt['pillar.get']('transmission:rpc-enable', "true") }},
     "rpc-password": "{{ salt['pillar.get']('transmission:rpc-password', {}) }}",
     "rpc-port": {{ salt['pillar.get']('transmission:rpc-enable', "9091") }},
     "rpc-url": "{{ salt['pillar.get']('transmission:rpc-url', "/transmission/") }}",
@@ -64,5 +64,5 @@
     "upload-slots-per-torrent": 14,
     "utp-enabled": true,
     "watch-dir": "{{ salt['pillar.get']('transmission:watch-dir-enabled', "/var/lib/transmission/Downloads/watch-dir") }}",
-    "watch-dir-enabled": "{{ salt['pillar.get']('transmission:watch-dir-enabled', false) }}"
+    "watch-dir-enabled": "{{ salt['pillar.get']('transmission:watch-dir-enabled', "false") }}"
 }
