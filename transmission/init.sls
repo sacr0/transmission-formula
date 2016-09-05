@@ -12,12 +12,6 @@ transmission:
       - file: transmission_config
     - watch:
       - file: transmission_config
-  service.dead:
-    - name: {{ transmission.service }}
-    - require:
-      - pkg: transmission
-    - watch:
-      - file: transmission_config
 
 # set config file
 transmission_config:
@@ -27,5 +21,10 @@ transmission_config:
     - template: jinja
     - user: {{ transmission.user }}
     - group: {{ transmission.group }}
+    - require:
+      - pkg: transmission
+      - service: transmission_config
+  service.dead:
+    - name: {{ transmission.service }}
     - require:
       - pkg: transmission
