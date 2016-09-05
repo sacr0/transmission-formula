@@ -9,17 +9,22 @@ transmission:
     - name: {{ transmission.service }}
     - require:
       - pkg: transmission
-      - file: transmission_config
+      - file: transmission_config_file
     - watch:
-      - file: transmission_config
+      - file: transmission_config_file
 
-# set config file
-transmission_config:
+#config folder needs to be present to create the config
+transmission_config_folder:  
   file.directory:
     - name: {{ transmission.config_folder }}
     - makedirs: True
     - user: {{ transmission.user }}
     - group: {{ transmission.group }}
+    - require:
+      - pkg: transmission    
+      
+# set config file
+transmission_config_file:
   file.managed:
     - name: {{ transmission.config_folder }}/{{ transmission.config_file }}
     - source: {{ transmission.config_src }} 
@@ -29,6 +34,7 @@ transmission_config:
     - require:
       - pkg: transmission
       - service: transmission_config
+      - directory: transmission_config_folder
   service.dead:
     - name: {{ transmission.service }}
     - require:
