@@ -15,8 +15,13 @@ transmission:
 
 # set config file
 transmission_config:
+  file.directory:
+    - name: {{ transmission.config_folder }}
+    - makedirs: True
+    - user: {{ transmission.user }}
+    - group: {{ transmission.group }}
   file.managed:
-    - name: {{ transmission.config }}
+    - name: {{ transmission.config_folder }}/{{ transmission.config_file }}
     - source: {{ transmission.config_src }} 
     - template: jinja
     - user: {{ transmission.user }}
