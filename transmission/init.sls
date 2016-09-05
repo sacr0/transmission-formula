@@ -34,6 +34,7 @@ transmission_config_file:
     - require:
       - pkg: transmission
       - file: transmission_config_folder
+      - service: transmission_config_file
   service.dead:
     - name: {{ transmission.service }}
     - require:
