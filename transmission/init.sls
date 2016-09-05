@@ -10,7 +10,7 @@ transmission:
     - require:
       - pkg: transmission
       - file: transmission_config_file
-    - watch:
+    - onchanges:
       - file: transmission_config_file
 
 #config folder needs to be present to create the config
@@ -33,9 +33,11 @@ transmission_config_file:
     - group: {{ transmission.group }}
     - require:
       - pkg: transmission
-      - service: transmission_config_file
       - file: transmission_config_folder
   service.dead:
     - name: {{ transmission.service }}
     - require:
       - pkg: transmission
+      - file: transmission_config_file
+    - onchanges:
+      - file: transmission_config_file
