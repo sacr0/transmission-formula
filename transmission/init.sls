@@ -32,12 +32,10 @@ transmission_config_file:
     - user: {{ transmission.user }}
     - group: {{ transmission.group }}
     - require:
-      - pkg: transmission
       - file: transmission_config_folder
-      - service: transmission_config_file
   service.dead:
     - name: {{ transmission.service }}
     - require:
       - pkg: transmission
-    - onchanges:
+    - prereq:
       - file: transmission_config_file
