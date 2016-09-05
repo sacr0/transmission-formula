@@ -38,6 +38,5 @@ transmission_config_file:
     - name: {{ transmission.service }}
     - require:
       - pkg: transmission
-      - file: transmission_config_file
     - onchanges:
       - file: transmission_config_file
