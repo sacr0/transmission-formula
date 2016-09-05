@@ -9,10 +9,17 @@ transmission:
     - name: {{ transmission.service }}
     - require:
       - pkg: transmission
+      - file: transmission_config
+    - watch:
+      - file: transmission_config
+  service.dead:
+    - name: {{ transmission.service }}
+    - require:
+      - pkg: transmission
     - watch:
       - file: transmission_config
 
-# copy config 
+# set config file
 transmission_config:
   file.managed:
     - name: {{ transmission.config }}
