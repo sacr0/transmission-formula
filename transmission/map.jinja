@@ -1,0 +1,18 @@
+{% set transmission = salt['grains.filter_by']({
+    'Debian': {
+        'pkg': 'transmission',
+        'service': 'transmission-daemon',
+        'config': '/etc/transmissiond.conf',
+        'config_src': 'salt://transmission/files/settings.json.jinja',
+		'user': 'transmission',
+		'group': 'transmission',
+    },
+	'Arch': {
+        'pkg': 'transmission-cli',
+        'service': 'transmission',
+        'config': '/var/lib/transmission/.config/transmission-daemon/settings.json',
+        'config_src': 'salt://transmission/files/settings.json.jinja',
+		'user': 'transmission',
+		'group': 'transmission',
+    },
+}, grain="os_family", merge=salt['pillar.get']('transmission:lookup')) %}
